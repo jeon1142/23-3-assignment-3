@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>I'm Starving</title>
+    <style type="text/css">
+        body { margin: 0; overflow: hidden; }
+        @font-face {font-family: 'BookkMyungjo-Bd'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/BookkMyungjo-Bd.woff2') format('woff2'); font-weight: 700;font-style: normal;}
+        h1 { text-align: center; padding-top: 40px; font-family:'BookkMyungjo-Bd';}
+        #ham { position: absolute; width: 25%; z-index: 10; cursor: pointer; }
+        #bg { position: absolute; top: 18%; left: 25%; width: 50%; }
+    </style>
+</head>
+<body>
+    <h1>Eat Your Hamburger</h1>
+    <img src="hamburger.png" id="ham">
+    <img src="bg.png" id="bg">
+    <script type="text/javascript">
+        var ham = document.getElementById("ham");
+        var isMoving = true;
+
+        ham.addEventListener("click", function () {
+            if (isMoving) {
+                ham.style.transition = "none";
+                isMoving = false;
+            } else {
+                ham.style.transition = "all 1s ease";
+                isMoving = true;
+            }
+
+            alert("YUM YUM!");
+        });
+
+        var x = 0;
+        var y = 0;
+        var stepX = 2;
+        var stepY = 2;
+
+        function moveHam() {
+            if (isMoving) {
+                x += stepX;
+                y += stepY;
+                ham.style.left = x + "px";
+                ham.style.top = y + "px";
+
+                if (x + ham.clientWidth >= window.innerWidth || x <= 0) {
+                    stepX *= -1;
+                }
+                if (y + ham.clientHeight >= window.innerHeight || y <= 0) {
+                    stepY *= -1;
+                }
+            }
+
+            requestAnimationFrame(moveHam);
+        }
+
+        // 이미지 이동 시작
+        moveHam();
+    </script>
+</body>
+</html>
